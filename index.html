@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Moon Coffee Shop | المقهى القمري الفاخر - القمر الأسطوري</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tajawal', 'Cairo', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(ellipse at 30% 40%, #030318, #010105);
+            min-height: 100vh;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* SUPERNATURAL MOON BACKGROUND - متحرك خرافي */
+        .super-moon {
+            position: fixed;
+            top: -100px;
+            right: -80px;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle at 35% 35%, #fff9c4, #ffdd77, #ffaa33);
+            border-radius: 50%;
+            box-shadow: 0 0 120px rgba(255, 220, 100, 0.9), 0 0 220px rgba(255, 180, 60, 0.6);
+            z-index: 0;
+            pointer-events: none;
+            animation: moonGlow 6s ease-in-out infinite, moonDrift 20s infinite alternate;
+            filter: blur(2px);
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 80px rgba(255, 210, 80, 0.7), 0 0 140px rgba(255, 160, 40, 0.5); opacity: 0.9; transform: scale(1);}
+            50% { box-shadow: 0 0 200px rgba(255, 230, 120, 1), 0 0 300px rgba(255, 200, 70, 0.9); opacity: 1; transform: scale(1.02);}
+            100% { box-shadow: 0 0 80px rgba(255, 210, 80, 0.7), 0 0 140px rgba(255, 160, 40, 0.5); opacity: 0.9; transform: scale(1);}
+        }
+
+        @keyframes moonDrift {
+            0% { transform: translate(0px, 0px) rotate(0deg);}
+            100% { transform: translate(-40px, 30px) rotate(8deg);}
+        }
+
+        /* floating mystical particles */
+        .mystic-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .dust {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,215,0,0.7), transparent);
+            border-radius: 50%;
+            animation: floatParticle 12s infinite linear;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            background: rgba(5, 5, 20, 0.5);
+            backdrop-filter: blur(15px);
+            border-radius: 40px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border: 1px solid rgba(255, 200, 100, 0.6);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            animation: slideDown 0.6s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 3rem;
+            color: #ffdf8c;
+            filter: drop-shadow(0 0 12px #ffcc66);
+            animation: moonSpin 20s infinite linear;
+        }
+        @keyframes moonSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffe6a3, #ffbb44, #ffaa33);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        button {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background: linear-gradient(95deg, #ffdd77, #ffaa33);
+            color: #0a0a1a;
+            position: relative;
+            overflow: hidden;
+        }
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(255, 200, 50, 0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #ffd966;
+            color: #ffd966;
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #e64539, #a1220a);
+            color: white;
+        }
+
+        /* profile card */
+        .profile-card {
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 35px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            border: 1px solid rgba(255,215,0,0.5);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.4);
+        }
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #ffdd88, #ffaa33);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1f1a2e;
+            box-shadow: 0 0 25px rgba(255,200,0,0.8);
+            animation: pulseGlow 2.2s infinite;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px rgba(255,200,0,0.6);}
+            100% { box-shadow: 0 0 30px rgba(255,200,0,0.9);}
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .product-card {
+            background: rgba(20, 15, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 20px;
+            transition: 0.3s;
+            border: 1px solid rgba(255,210,90,0.4);
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffcc55;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5);
+        }
+
+        /* Admin Panel Blacklist Section (New) */
+        .blacklist-section {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-right: 6px solid #ff4444;
+        }
+        .blacklist-user-item {
+            background: rgba(255, 60, 60, 0.2);
+            border-radius: 50px;
+            padding: 8px 20px;
+            margin: 8px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #ff7777;
+        }
+        .remove-blacklist {
+            background: #aa2222;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Tables and other styles */
+        .admin-section, .stats-grid {
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: linear-gradient(145deg, rgba(0,0,0,0.5), rgba(255,200,70,0.1));
+            border-radius: 25px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .users-table, .products-table, .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255,215,0,0.2);
+        }
+        .category-tag {
+            background: rgba(255,215,0,0.2);
+            padding: 8px 18px;
+            border-radius: 40px;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .delete-cat {
+            margin-right: 10px;
+            color: #ff8888;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top:0;left:0;width:100%;height:100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .modal-content {
+            background: #14182b;
+            border-radius: 40px;
+            padding: 35px;
+            max-width: 450px;
+            width: 90%;
+            border: 1px solid gold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #ffcc66;
+            color: white;
+        }
+        footer {
+            margin-top: 70px;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+            border-radius: 40px;
+            padding: 35px;
+        }
+        @media (max-width: 700px) {
+            .profile-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="super-moon"></div>
+    <div class="mystic-dust" id="dustContainer"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo" onclick="window.location.reload()">
+                <i class="fas fa-moon"></i>
+                <h1>Moon Coffee Shop</h1>
+                <span style="font-size:0.8rem; color:#ffdd99;">🌙 قمر خارق للطبيعة ✨</span>
+            </div>
+            <div class="nav-buttons" id="navButtons">
+                <button onclick="showLoginModal()"><i class="fas fa-sign-in-alt"></i> دخول</button>
+                <button onclick="showRegisterModal()" class="btn-outline"><i class="fas fa-user-plus"></i> حساب جديد</button>
+            </div>
+        </header>
+
+        <div class="main-content" id="mainContent">
+            <div id="userView">
+                <div id="profileContainer"></div>
+                <div style="text-align:center; margin:20px 0">
+                    <i class="fas fa-magic" style="font-size: 4rem; color:#ffcc77; filter: drop-shadow(0 0 20px gold);"></i>
+                    <h2 style="font-size:2rem;">✨ أسطورة القمر ✨</h2>
+                </div>
+                <div id="categoriesContainer" class="categories-container"></div>
+                <div id="productsContainer" class="products-grid"></div>
+                <div id="userOrdersSection" class="admin-section" style="display: none;">
+                    <h2><i class="fas fa-list-ul"></i> 📋 طلباتي السحرية</h2>
+                    <div id="userOrdersList"></div>
+                </div>
+            </div>
+
+            <div id="adminView" class="admin-panel" style="display:none;">
+                <div class="stats-grid">
+                    <div class="stat-card" onclick="showUsersList()"><i class="fas fa-users"></i><h3 id="userCount">0</h3><p>المستخدمين</p></div>
+                    <div class="stat-card"><i class="fas fa-shopping-cart"></i><h3 id="ordersCount">0</h3><p>الطلبات</p></div>
+                    <div class="stat-card"><i class="fas fa-tags"></i><h3 id="categoriesCount">0</h3><p>الأقسام</p></div>
+                    <div class="stat-card"><i class="fas fa-coffee"></i><h3 id="productsCount">0</h3><p>المنتجات</p></div>
+                </div>
+
+                <!-- NEW BLACKLIST SECTION (ADMIN ONLY) -->
+                <div class="blacklist-section">
+                    <h2><i class="fas fa-ban" style="color:#ff6666;"></i> 🚫 بلاك ليست (حظر المستخدمين)</h2>
+                    <p style="margin-bottom: 15px;">إضافة اسم مستخدم إلى القائمة السوداء يمنعه من الدخول حتى لو أنشأ حساب جديد (الحظر حسب الاسم)</p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <input type="text" id="blacklistUsername" placeholder="اسم المستخدم للحظر" style="flex:1; padding: 12px; border-radius: 50px; background: #2a1e2e; border:1px solid #ffaa44; color:white;">
+                        <button onclick="addToBlacklist()"><i class="fas fa-skull"></i> إضافة للقائمة السوداء</button>
+                    </div>
+                    <div id="blacklistContainer" style="margin-top: 25px; display: flex; flex-wrap: wrap; gap: 12px;"></div>
+                </div>
+
+                <div class="admin-section" id="usersListSection" style="display:none;">
+                    <h2>👥 المستخدمين المسجلين</h2>
+                    <div style="overflow-x:auto;"><table class="users-table"><thead><tr><th>#</th><th>اسم المستخدم</th><th>الاسم الكامل</th><th>البريد</th><th>تاريخ التسجيل</th><th>الطلبات</th></tr></thead><tbody id="usersListBody"></tbody></table></div>
+                </div>
+
+                <div class="admin-section"><h2>✨ إضافة منتج</h2><div class="form-group"><input type="text" id="productName" placeholder="اسم المنتج"></div><div class="form-group"><input type="number" id="productPrice" placeholder="السعر (SYP)"></div><div class="form-group"><select id="productCategory"></select></div><button onclick="addProduct()">➕ إضافة منتج</button></div>
+                <div class="admin-section"><h2>📂 إدارة الأقسام</h2><div class="form-group"><input type="text" id="newCategoryName" placeholder="قسم جديد"></div><button onclick="addCategory()">➕ إضافة قسم</button><div id="categoriesList" style="margin-top:20px;"></div></div>
+                <div class="admin-section"><h2>📦 تعديل/حذف المنتجات</h2><div style="overflow-x:auto;"><table class="products-table"><thead><tr><th>المنتج</th><th>القسم</th><th>السعر</th><th>إجراءات</th></tr></thead><tbody id="adminProductsList"></tbody></table></div></div>
+                <div class="admin-section"><h2>📊 إدارة الطلبات</h2><div style="overflow-x:auto;"><table class="orders-table"><thead><tr><th>المستخدم</th><th>المنتج</th><th>السعر</th><th>الحالة</th><th>تغيير الحالة</th></tr></thead><tbody id="adminOrdersList"></tbody></table></div></div>
+            </div>
+        </div>
+        <footer><div class="social-links" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;"><span><i class="fab fa-instagram"></i> @moon_coffee_shop_1</span><span><i class="fab fa-instagram"></i> @mohamad_awad8</span><span><i class="fab fa-instagram"></i> @mohamad_.shoman</span></div><div>📍 جديدة عرطوز البلد - شارع الكنيسة 🌙</div></footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="loginModal" class="modal"><div class="modal-content"><h2>🌙 تسجيل الدخول</h2><div class="form-group"><input type="text" id="loginUsername" placeholder="اسم المستخدم"></div><div class="form-group"><input type="password" id="loginPassword" placeholder="كلمة المرور"></div><button onclick="login()" style="width:100%;">دخول</button><button onclick="closeModal('loginModal')" class="btn-outline" style="width:100%; margin-top:10px;">إغلاق</button></div></div>
+    <div id="registerModal" class="modal"><div class="modal-content"><h2>✨ حساب جديد</h2><div class="form-group"><input type="text" id="regUsername" placeholder="اسم المستخدم *"></div><div class="form-group"><input type="password" id="regPassword" placeholder="كلمة المرور *"></div><div class="form-group"><input type="text" id="regFullName" placeholder="الاسم الكامل"></div><div class="form-group"><input type="email" id="regEmail" placeholder="البريد الإلكتروني"></div><button onclick="register()" style="width:100%;">تسجيل</button><button onclick="closeModal('registerModal')" class="btn-outline" style="width:100%; margin-top:10px;">إلغاء</button></div></div>
+    <div id="editProductModal" class="modal"><div class="modal-content"><h2>✏️ تعديل المنتج</h2><input type="hidden" id="editProductId"><div class="form-group"><input type="text" id="editProductName" placeholder="اسم المنتج"></div><div class="form-group"><input type="number" id="editProductPrice" placeholder="السعر"></div><div class="form-group"><select id="editProductCategory"></select></div><button onclick="saveEditProduct()">حفظ التعديل</button><button onclick="closeModal('editProductModal')" class="btn-outline">إلغاء</button></div></div>
+
+    <script>
+        // ---------- DATA ----------
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        let categories = JSON.parse(localStorage.getItem('categories')) || ['طعام', 'مشروبات'];
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        let blacklist = JSON.parse(localStorage.getItem('blacklist')) || [];   // array of usernames banned
+        let currentUser = null;
+        const ADMIN_USERNAME = 'moon';
+        const ADMIN_PASSWORD = 'mohamad';
+
+        function saveAll() {
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('products', JSON.stringify(products));
+            localStorage.setItem('categories', JSON.stringify(categories));
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.setItem('blacklist', JSON.stringify(blacklist));
+        }
+
+        // is username blacklisted?
+        function isBlacklisted(username) {
+            return blacklist.includes(username);
+        }
+
+        // remove blacklist
+        function removeFromBlacklist(username) {
+            blacklist = blacklist.filter(u => u !== username);
+            saveAll();
+            renderBlacklistUI();
+            alert(`✅ تم إزالة ${username} من القائمة السوداء`);
+        }
+
+        function addToBlacklist() {
+            let username = document.getElementById('blacklistUsername').value.trim();
+            if(!username) { alert("أدخل اسم مستخدم للحظر"); return; }
+            if(username === ADMIN_USERNAME) { alert("لا يمكن حظر المدير الرئيسي"); return; }
+            if(!blacklist.includes(username)) {
+                blacklist.push(username);
+                saveAll();
+                renderBlacklistUI();
+                document.getElementById('blacklistUsername').value = '';
+                alert(`🚫 تم إضافة ${username} إلى القائمة السوداء. لن يتمكن من تسجيل الدخول أو التسجيل بهذا الاسم.`);
+                // if current user matches blacklist, logout immediately
+                if(currentUser && !currentUser.isAdmin && currentUser.username === username) {
+                    alert("⚠️ لقد تم حظر حسابك! سيتم تسجيل الخروج.");
+                    logout();
+                }
+            } else {
+                alert("المستخدم موجود بالفعل في القائمة السوداء");
+            }
+        }
+
+        function renderBlacklistUI() {
+            const container = document.getElementById('blacklistContainer');
+            if(!container) return;
+            if(blacklist.length === 0) {
+                container.innerHTML = '<div style="color:#ffaa88;">✨ القائمة السوداء فارغة ✨</div>';
+                return;
+            }
+            let html = '';
+            blacklist.forEach(user => {
+                html += `<div class="blacklist-user-item"><i class="fas fa-user-slash"></i> ${user} <button class="remove-blacklist" onclick="removeFromBlacklist('${user}')">إلغاء الحظر</button></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // modify register to check blacklist by username
+        // modify login to check blacklist
+        // generate mystical dust
+        function createDust() {
+            const dustDiv = document.getElementById('dustContainer');
+            for(let i=0;i<80;i++) {
+                let d = document.createElement('div');
+                d.classList.add('dust');
+                let size = Math.random() * 8 + 2;
+                d.style.width = size + 'px';
+                d.style.height = size + 'px';
+                d.style.left = Math.random() * 100 + '%';
+                d.style.animationDelay = Math.random() * 15 + 's';
+                d.style.animationDuration = Math.random() * 10 + 8 + 's';
+                d.style.opacity = Math.random() * 0.6;
+                dustDiv.appendChild(d);
+            }
+        }
+        createDust();
+
+        // sample init
+        if(products.length === 0) products = [{ id:1, name:'☕ قهوة عربية أصيلة', price:5000, category:'مشروبات'},{ id:2, name:'🥤 كابتشينو فاخر', price:7000, category:'مشروبات'},{ id:3, name:'🍫 شوكولاتة ساخنة', price:6000, category:'مشروبات'},{ id:4, name:'🥐 كرواسون فرنسي', price:4000, category:'طعام'},{ id:5, name:'🍰 تشيز كيك نيويورك', price:8000, category:'طعام'}];
+        if(users.length === 0) users = [{ id:1, username:'ahmed', password:'123', fullName:'أحمد محمد', email:'ahmed@ex.com', joinDate: new Date().toISOString() },{ id:2, username:'sara', password:'123', fullName:'سارة علي', email:'sara@ex.com', joinDate: new Date().toISOString() }];
+        saveAll();
+
+        function displayProfile() {
+            let container = document.getElementById('profileContainer');
+            if(!container || !currentUser || currentUser.isAdmin) { if(container) container.innerHTML = ''; return; }
+            let user = users.find(u=>u.id === currentUser.id);
+            if(user) container.innerHTML = `<div class="profile-card"><div class="profile-avatar">${(user.fullName||user.username).charAt(0)}</div><div><h3>✨ ${user.fullName||user.username}</h3><p>@${user.username}</p><p>طلبات: ${orders.filter(o=>o.userId === currentUser.id).length}</p></div></div>`;
+        }
+
+        function displayProducts() {
+            let container = document.getElementById('productsContainer');
+            if(!container) return;
+            if(currentUser && currentUser.isAdmin) { displayAdminProductsList(); return; }
+            let html = '';
+            products.forEach(p=>{ html+=`<div class="product-card" onclick="orderProduct(${p.id})"><div class="product-icon"><i class="fas fa-moon-stars"></i></div><h3>${p.name}</h3><div class="price">${p.price.toLocaleString()} SYP</div><span class="category-tag">${p.category}</span><div><i class="fas fa-magic"></i> اطلب الآن</div></div>`;});
+            container.innerHTML = html;
+        }
+
+        function displayAdminProductsList() {
+            let tbody = document.getElementById('adminProductsList');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+            products.forEach(p=>{
+                let row = `<tr><td>${p.name}</td><td>${p.category}</td><td>${p.price.toLocaleString()} SYP</td><td><button class="btn-danger" onclick="deleteProduct(${p.id})" style="padding:5px 12px;"><i class="fas fa-trash"></i> حذف</button> <button onclick="showEditProductModal(${p.id})" style="background:#ffaa33; padding:5px 12px;">تعديل</button></td></tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function displayCategories() {
+            let cont = document.getElementById('categoriesContainer');
+            if(!cont) return;
+            let isAdmin = currentUser && currentUser.isAdmin;
+            let html = '';
+            categories.forEach(cat=>{
+                html+=`<div class="category-tag" onclick="${!isAdmin ? `filterByCategory('${cat}')` : ''}"><i class="fas fa-tag"></i> ${cat} ${isAdmin ? `<span class="delete-cat" onclick="event.stopPropagation(); deleteCategory('${cat}')"><i class="fas fa-trash-alt"></i></span>` : ''}</div>`;
+            });
+            cont.innerHTML = html;
+            if(isAdmin && document.getElementById('categoriesList')) displayCategoriesList();
+            if(isAdmin) document.getElementById('categoriesCount').innerHTML = categories.length;
+        }
+
+        function displayCategoriesList() { let div=document.getElementById('categoriesList'); if(!div) return; let html='<h3>الأقسام الحالية</h3>'; categories.forEach(c=>{ html+=`<div class="category-tag" style="margin:5px;">${c} <span class="delete-cat" onclick="deleteCategory('${c}')"><i class="fas fa-times"></i></span></div>`;}); div.innerHTML=html; }
+
+        function deleteCategory(cat) { if(confirm(`حذف القسم ${cat} مع جميع منتجاته؟`)){ categories = categories.filter(c=>c!==cat); products = products.filter(p=>p.category !== cat); saveAll(); displayCategories(); displayProducts(); updateStats(); loadAdminCategories(); alert("تم الحذف"); }}
+
+        function deleteProduct(id) { if(confirm("حذف المنتج؟")){ products = products.filter(p=>p.id !== id); saveAll(); displayProducts(); updateStats(); }}
+
+        function showEditProductModal(id){ let p = products.find(p=>p.id===id); if(p){ document.getElementById('editProductId').value=id; document.getElementById('editProductName').value=p.name; document.getElementById('editProductPrice').value=p.price; let sel=document.getElementById('editProductCategory'); sel.innerHTML=''; categories.forEach(c=>{ sel.innerHTML+=`<option value="${c}" ${p.category===c?'selected':''}>${c}</option>`;}); document.getElementById('editProductModal').style.display='flex';} }
+        function saveEditProduct(){ let id=parseInt(document.getElementById('editProductId').value); let name=document.getElementById('editProductName').value; let price=parseFloat(document.getElementById('editProductPrice').value); let cat=document.getElementById('editProductCategory').value; if(!name||!price||!cat) return alert("املأ الحقول"); let idx=products.findIndex(p=>p.id===id); if(idx!==-1){ products[idx]={...products[idx], name, price, category:cat}; saveAll(); displayProducts(); updateStats(); closeModal('editProductModal'); alert("تم التعديل");} }
+
+        function filterByCategory(cat) { let container=document.getElementById('productsContainer'); let filtered=products.filter(p=>p.category===cat); let html=''; filtered.forEach(p=>{ html+=`<div class="product-card" onclick="orderProduct(${p.id})"><h3>${p.name}</h3><div>${p.price} SYP</div><span>${p.category}</span></div>`;}); container.innerHTML=html;}
+
+        function orderProduct(pid) { if(!currentUser || currentUser.isAdmin){ alert("يرجى تسجيل الدخول كعميل"); showLoginModal(); return; } let prod=products.find(p=>p.id===pid); if(prod){ let newOrder={ id:Date.now(), userId:currentUser.id, username:currentUser.username, productName:prod.name, price:prod.price, status:'قيد الانتظار', date:new Date().toLocaleString('ar')}; orders.push(newOrder); saveAll(); alert(`✅ طلب ${prod.name} تم بنجاح!`); displayUserOrders(); displayProfile(); updateStats(); }}
+
+        function displayUserOrders() { if(!currentUser||currentUser.isAdmin){ document.getElementById('userOrdersSection').style.display='none'; return; } let userOrds=orders.filter(o=>o.userId===currentUser.id); let section=document.getElementById('userOrdersSection'); let container=document.getElementById('userOrdersList'); if(userOrds.length===0){ section.style.display='none'; return; } section.style.display='block'; let html='<table class="orders-table"><tr><th>المنتج</th><th>السعر</th><th>الحالة</th><th>التاريخ</th></tr>'; userOrds.forEach(o=>{ html+=`<tr><td>${o.productName}</td><td>${o.price}</td><td>${o.status}</td><td>${o.date}</td></tr>`;}); html+='</table>'; container.innerHTML=html;}
+
+        function addProduct() { let n=document.getElementById('productName').value, p=parseFloat(document.getElementById('productPrice').value), c=document.getElementById('productCategory').value; if(!n||!p||!c) return alert("أكمل البيانات"); products.push({id:Date.now(), name:n, price:p, category:c}); saveAll(); displayProducts(); updateStats(); document.getElementById('productName').value=''; document.getElementById('productPrice').value=''; alert(`✅ تمت الإضافة`);}
+
+        function addCategory() { let name=document.getElementById('newCategoryName').value.trim(); if(!name) return; if(categories.includes(name)) return alert("موجود"); categories.push(name); saveAll(); displayCategories(); updateStats(); document.getElementById('newCategoryName').value=''; loadAdminCategories();}
+
+        function loadAdminCategories() { let sel=document.getElementById('productCategory'); if(sel){ sel.innerHTML=''; categories.forEach(c=>{ sel.innerHTML+=`<option value="${c}">${c}</option>`;}); } }
+
+        function updateOrderStatus(oid, newStatus) { let ord=orders.find(o=>o.id===oid); if(ord){ ord.status=newStatus; saveAll(); loadAdminOrders(); updateStats(); if(currentUser && !currentUser.isAdmin) displayUserOrders(); alert(`تم التحديث إلى ${newStatus}`); } }
+        function loadAdminOrders() { let tbody=document.getElementById('adminOrdersList'); if(!tbody) return; tbody.innerHTML=''; orders.forEach(o=>{ let row=`<tr><td>${o.username}</td><td>${o.productName}</td><td>${o.price}</td><td>${o.status}</td><td><select onchange="updateOrderStatus(${o.id}, this.value)"><option ${o.status==='قيد الانتظار'?'selected':''}>قيد الانتظار</option><option ${o.status==='تم التجهيز'?'selected':''}>تم التجهيز</option><option ${o.status==='تم التوصيل'?'selected':''}>تم التوصيل</option></select></td></tr>`; tbody.innerHTML+=row; }); }
+        function updateStats() { let allUsers=JSON.parse(localStorage.getItem('users'))||[]; let allOrders=JSON.parse(localStorage.getItem('orders'))||[]; let allCats=JSON.parse(localStorage.getItem('categories'))||[]; let allProds=JSON.parse(localStorage.getItem('products'))||[]; if(document.getElementById('userCount')) document.getElementById('userCount').innerHTML = allUsers.length; if(document.getElementById('ordersCount')) document.getElementById('ordersCount').innerHTML = allOrders.length; if(document.getElementById('categoriesCount')) document.getElementById('categoriesCount').innerHTML = allCats.length; if(document.getElementById('productsCount')) document.getElementById('productsCount').innerHTML = allProds.length; }
+
+        function showUsersList() { let sec=document.getElementById('usersListSection'); if(sec.style.display==='none'){ let tbody=document.getElementById('usersListBody'); tbody.innerHTML=''; users.forEach((u,idx)=>{ let cnt=orders.filter(o=>o.userId===u.id).length; tbody.innerHTML+=`<tr><td>${idx+1}</td><td>${u.username}</td><td>${u.fullName||'—'}</td><td>${u.email||'—'}</td><td>${new Date(u.joinDate).toLocaleDateString()}</td><td>${cnt}</td></tr>`;}); sec.style.display='block'; } else sec.style.display='none'; }
+
+        // LOGIN with BLACKLIST check
+        function login() { let un=document.getElementById('loginUsername').value; let pw=document.getElementById('loginPassword').value; if(un===ADMIN_USERNAME && pw===ADMIN_PASSWORD){ currentUser={id:'admin', username:'admin', isAdmin:true}; showAdminPanel(); closeModal('loginModal'); updateStats(); loadAdminCategories(); loadAdminOrders(); displayCategories(); displayProducts(); renderBlacklistUI(); return; } if(isBlacklisted(un)){ alert("🚫 هذا المستخدم محظور من قبل الإدارة ولا يمكنه الدخول."); return; } let user=users.find(u=>u.username===un && u.password===pw); if(user){ currentUser={id:user.id, username:user.username, isAdmin:false}; showUserLoggedIn(); closeModal('loginModal'); displayProfile(); displayUserOrders(); alert(`🌙 أهلاً ${user.fullName||user.username}`); } else alert("بيانات خاطئة"); }
+
+        function register() { let un=document.getElementById('regUsername').value.trim(); let pw=document.getElementById('regPassword').value; let full=document.getElementById('regFullName').value; let email=document.getElementById('regEmail').value; if(!un||!pw) return alert("اسم المستخدم وكلمة المرور مطلوبة"); if(isBlacklisted(un)){ alert("⚠️ اسم المستخدم هذا موجود في القائمة السوداء ولا يمكن إنشاء حساب به."); return; } if(users.find(u=>u.username===un)){ alert("اسم المستخدم موجود بالفعل"); return; } let newUser={id:Date.now(), username:un, password:pw, fullName:full||un, email:email||'', joinDate:new Date().toISOString()}; users.push(newUser); saveAll(); currentUser={id:newUser.id, username:newUser.username, isAdmin:false}; closeModal('registerModal'); showUserLoggedIn(); displayProfile(); displayUserOrders(); alert(`✅ تم التسجيل بنجاح، مرحباً ${full||un}`); updateStats(); }
+
+        function showUserLoggedIn(){ document.getElementById('navButtons').innerHTML=`<button onclick="alert('✨ مرحى! طلباتك بالأسفل')"><i class="fas fa-bell"></i> إشعارات</button><button onclick="logout()" class="btn-outline">تسجيل خروج</button>`; document.getElementById('adminView').style.display='none'; document.getElementById('userView').style.display='block'; displayProducts(); displayCategories(); displayProfile(); displayUserOrders();}
+        function showAdminPanel(){ document.getElementById('navButtons').innerHTML=`<button onclick="logout()" class="btn-outline">خروج المدير</button>`; document.getElementById('userView').style.display='none'; document.getElementById('adminView').style.display='block'; updateStats(); loadAdminCategories(); loadAdminOrders(); displayCategories(); displayProducts(); renderBlacklistUI(); displayUsersList(); }
+        function logout(){ currentUser=null; document.getElementById('navButtons').innerHTML=`<button onclick="showLoginModal()">تسجيل دخول</button><button onclick="showRegisterModal()" class="btn-outline">حساب جديد</button>`; document.getElementById('userView').style.display='block'; document.getElementById('adminView').style.display='none'; document.getElementById('profileContainer').innerHTML=''; document.getElementById('userOrdersSection').style.display='none'; displayProducts(); displayCategories(); alert("تم الخروج");}
+        function showLoginModal(){ document.getElementById('loginModal').style.display='flex';}
+        function showRegisterModal(){ document.getElementById('registerModal').style.display='flex';}
+        function closeModal(id){ document.getElementById(id).style.display='none';}
+        window.onclick = e=>{ if(e.target.classList.contains('modal')) e.target.style.display='none';}
+
+        displayProducts(); displayCategories(); updateStats(); renderBlacklistUI();
+    </script>
+</body>
+</html>
